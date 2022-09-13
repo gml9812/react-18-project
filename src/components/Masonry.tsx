@@ -2,12 +2,11 @@ import React, { Children, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const GridContainer = styled.div<{ isInvisible: boolean }>`
+  opacity: ${(props) => (props.isInvisible ? '0' : '1')};
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: 20px;
-
-  display: ${(props) => (props.isInvisible ? 'none' : 'block')}
 
   padding: 5rem 0 5rem 0;
 `;
@@ -41,10 +40,13 @@ export const Masonry = (props: MasonryProps) => {
   }
 
   useEffect(() => {
-    SetGridItemHeight();
-    setIsinvisible(false);
     window.addEventListener('resize', SetGridItemHeight);
   }, []);
+
+  useEffect(() => {
+    SetGridItemHeight();
+    setIsinvisible(false);
+  }, [props.children]);
 
   return (
     <GridContainer className="grid" isInvisible={isInvisible}>
