@@ -12,7 +12,6 @@ export type LazyLoadImageProps = {
 
 export const LazyLoadImage = (props: LazyLoadImageProps) => {
   const { src, alt, width, height, lazy = false } = props;
-
   const { elementRef, isLoaded } = useIsImgLoaded(lazy);
 
   return (

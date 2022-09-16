@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const GridContainer = styled.div<{ isInvisible: boolean }>`
   opacity: ${(props) => (props.isInvisible ? '0' : '1')};
+  transition: opacity 0.5s ease;
   display: grid;
   grid-gap: 15px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

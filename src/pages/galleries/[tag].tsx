@@ -154,7 +154,7 @@ const ImageList = (props: ImageListProps) => {
 
   const ref = useIntersect(
     useCallback(() => {
-      console.log(isValidating);
+      console.log(size);
       if (/*hasNextPage && !isValidating*/ true) {
         setSize((size) => size + 1);
       }
