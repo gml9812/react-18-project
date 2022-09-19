@@ -1,11 +1,4 @@
-import {
-  Suspense,
-  useDeferredValue,
-  useEffect,
-  useState,
-  useCallback,
-} from 'react';
-import useSWR from 'swr';
+import { Suspense, useEffect, useState, useCallback } from 'react';
 import { fetcher } from 'src/api/fetcher';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
@@ -114,27 +107,6 @@ const Observer = styled.div`
 `;
 
 const ImageList = (props: ImageListProps) => {
-  const [test, setTest] = useState(1);
-
-  /*
-  const imageList = useSWR(
-    [
-      `http://localhost:3000/search/image/?query=${encodeURIComponent(
-        props.selectedTag,
-      )}&display=100&start=1&sort=sim`,
-      {
-        method: 'GET',
-        headers: {
-          'X-Naver-Client-Id': '032iDWACf7DFLI4vtkDA',
-          'X-Naver-Client-Secret': 'IHRbgFg13H',
-        },
-      },
-    ],
-    fetcher,
-    { suspense: true },
-  );
-  */
-
   const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
     (index) => [
       `http://localhost:3000/search/image/?query=${encodeURIComponent(
@@ -154,11 +126,10 @@ const ImageList = (props: ImageListProps) => {
 
   const ref = useIntersect(
     useCallback(() => {
-      console.log(size);
-      if (/*hasNextPage && !isValidating*/ true) {
+      if (/*hasNextPage &&*/ !isValidating) {
         setSize((size) => size + 1);
       }
-    }, []),
+    }, [setSize, isValidating]),
   );
 
   return (
